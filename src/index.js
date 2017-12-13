@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import App from './App'
-import Interface from "./GlobalData"
-import Uitis from "public/libs/Utils"
+
 import router from './routers';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
@@ -10,9 +9,7 @@ import store from './store/'
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
-Vue.prototype.Interface = Interface;
-Vue.prototype.Uitis = Uitis;
-window.APP = Uitis;
+
 
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
