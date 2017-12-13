@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import ccode from "../components/countdown.vue"
     export default {
         props: [],
         data() {

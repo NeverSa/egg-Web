@@ -1,16 +1,12 @@
 ## 项目介绍
-    优选理财H5页面
-    mock 服务接口地址：
+    基于element-ui的后端管理系统：
    
    
 ## 技术架构
     Vue 2.0+
-    vue-loader
-    vue-router
-    vue-resource
-    vue-touch
-    Webpack 2.0+
-    Webpack-dev-server
+    vuxe
+    
+    
    
    
    

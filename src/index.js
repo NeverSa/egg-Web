@@ -5,6 +5,7 @@ import Uitis from "public/libs/Utils"
 import router from './routers';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+import store from './store/'
 
 Vue.use(ElementUI);
 
@@ -26,6 +27,7 @@ router.beforeEach((to, from, next) => {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 });

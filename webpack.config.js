@@ -29,7 +29,7 @@ module.exports = {
     compress: true,
     hot: true,
     historyApiFallback: true,
-    host: ip.address(),
+    host: "127.0.0.1",
     port: 9010,
     inline: true
   },
@@ -107,7 +107,7 @@ module.exports = {
     new ExtractTextPlugin("style.css"),
     new HtmlWebpackPlugin({
       inject: 'body',
-      title: '优选钱包',
+      title: 'element-ui后端管理系统',
       template: './src/index.html'
     }),
 

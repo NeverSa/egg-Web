@@ -26,6 +26,7 @@
 
 <script>
 import {login} from "../api/api"
+import {mapActions, mapState} from 'vuex'
 	export default {
 	    data(){
 			return {
@@ -46,17 +47,20 @@ import {login} from "../api/api"
 		},
 		mounted(){
 			this.showLogin = true;
+			if(!this.userInfo.id){
+			  this.getUserData()
+      }
 		},
 		computed: {
-		//	...mapState(['adminInfo']),
+			...mapState(['userInfo']),
 		},
 		methods: {
-		//	...mapActions(['getAdminData']),
+			...mapActions(['getUserData']),
       submitForm(formName) {
 				this.$refs[formName].validate( (valid) => {
 					if (valid) {
 						login({"username": this.loginForm.username, password: this.loginForm.password}).then(res=>{
-						  debugger
+							debugger
 						 if(res.data.success){
                this.$message({
                  type: 'success',
@@ -82,7 +86,7 @@ import {login} from "../api/api"
 			},
 		},
 		watch: {
-		/*	adminInfo: function (newValue){
+      userInfo: function (newValue){
 				if (newValue.id) {
 					this.$message({
                         type: 'success',
@@ -90,7 +94,7 @@ import {login} from "../api/api"
                     });
 					this.$router.push('manage')
 				}
-			}*/
+			}
 		}
 	}
 </script>
