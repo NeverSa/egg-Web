@@ -6,7 +6,7 @@
 					<el-menu-item index="home"><i class="el-icon-menu"></i>首页</el-menu-item>
 					<el-submenu index="2">
 						<template slot="title"><i class="el-icon-document"></i>数据管理</template>
-						<el-menu-item index="userList">用户列表</el-menu-item>
+						<el-menu-item index="addadmin">添加管理员</el-menu-item>
 						<el-menu-item index="shopList">商家列表</el-menu-item>
 						<el-menu-item index="foodList">食品列表</el-menu-item>
 						<el-menu-item index="orderList">订单列表</el-menu-item>
@@ -39,6 +39,7 @@
 				</el-menu>
 			</el-col>
 			<el-col :span="20" style="height: 100%;overflow: auto;">
+					<tophead></tophead>	
 				<keep-alive>
 				    <router-view></router-view>
 				</keep-alive>
@@ -48,12 +49,19 @@
 </template>
 
 <script>
+import tophead from "../components/topHead"
     export default {
+		components:{
+          tophead
+		},
 		computed: {
 			defaultActive: function(){
 				return this.$route.path.replace('/', '');
 			}
 		},
+		created(){
+			console.log(this.$route)
+		}
     }
 </script>
 

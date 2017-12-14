@@ -66,7 +66,7 @@ import {mapActions, mapState} from 'vuex'
                  type: 'success',
                  message: res.data.msg
                });
-               this.$router.push('home')
+                this.$router.push('home')
              }else {
                this.$message({
                  type: 'error',
@@ -87,12 +87,13 @@ import {mapActions, mapState} from 'vuex'
 		},
 		watch: {
       userInfo: function (newValue){
-				if (newValue.id) {
+		  debugger
+				if (newValue.user_id) {
 					this.$message({
                         type: 'success',
                         message: '检测到您之前登录过，将自动登录'
                     });
-					this.$router.push('manage')
+					this.$router.push('home')
 				}
 			}
 		}

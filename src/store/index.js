@@ -18,7 +18,6 @@ const actions = {
    getUserData({commit}){
     try{
        getUserInfo().then(res=>{
-         debugger
          if (res.data.success) {
            commit('saveUserInfo', res.data.data);
          }else{

@@ -28,8 +28,14 @@ export default new VueRouter({
       children: [{
         path: '',
         component: resolve => require(['@/router/index'], resolve),
-        meta: [],
-      }],
+        meta: ["主页"],
+      },
+      {
+        path: '/addadmin',
+        component: resolve => require(['@/router/addadmin'], resolve),
+        meta: ["数据管理","添加管理员"],
+      }
+    ],
     }
   ]
 })
