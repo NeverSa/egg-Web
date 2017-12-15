@@ -41,9 +41,9 @@
     <el-col :span="24">
     <span>{{Totle}} asdasdasdsa </span>  
      <el-pagination
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page.sync="Totle"
+      :current-page="currentPage"
+      :page-size="20"
       layout="total, prev, pager, next"
       :total="Totle">
     </el-pagination>
@@ -58,14 +58,18 @@ import {getUserList} from "../api/api"
     data() {
       return {
         tableData: [],
-        Totle:"",
+          Totle:0,
+         currentPage: 1,
       }
     },
     methods: {
-      handleEdit(index, row) {
+      handleCurrentChange(index, row) {
         console.log(index, row);
       },
       handleDelete(index, row) {
+        console.log(index, row);
+      },
+         handleEdit(index, row) {
         console.log(index, row);
       }
     },

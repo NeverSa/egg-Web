@@ -5,7 +5,7 @@
 		<el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
 		<el-breadcrumb-item v-for="(item, index) in $route.meta" key="index">{{item}}</el-breadcrumb-item>
 	</el-breadcrumb>
-    <el-dropdown @command="handleCommand" menu-align='start'>
+    <el-dropdown  menu-align='start'>
 			<img  class="avator">
 			<el-dropdown-menu slot="dropdown">
 				<el-dropdown-item  style="color:#000">首页</el-dropdown-item>
@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-  
+   
 }
 </script>
 <style lang="less" scoped>
