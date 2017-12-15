@@ -12,5 +12,9 @@ function Myaxios(url,data,type) {
 }
 //登录
 export const login =data=> Myaxios('/admin/user/login', data, 'post')
+//获取session信息
 export const getUserInfo =data=> Myaxios('/admin/user/get_user_info',data, 'post')
+//获取管理员列表
+export const getUserList =data=> Myaxios('/admin/user/get_user_list',data, 'post')
+
 
