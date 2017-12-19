@@ -3,7 +3,8 @@
 	  	<transition name="formfade" mode="in-out">
 	  		<section class="form_contianer" v-show="showLogin">
 		  		<div class="manage_tip">
-		  			<p>后台管理系统</p>
+					  <img src="../public/img/login.jpg" style="width:100px; height:100px"/>
+		  			<p>自动化褥羊毛系统</p>
 		  		</div>
 		    	<el-form :model="loginForm" :rules="rules" ref="loginForm">
 					<el-form-item prop="username">
@@ -108,7 +109,7 @@ import {mapActions, mapState} from 'vuex'
 	.manage_tip{
 		position: absolute;
 		width: 100%;
-		top: -100px;
+		top: -170px;
 		left: 0;
 		p{
 			font-size: 34px;

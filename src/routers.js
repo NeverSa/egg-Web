@@ -34,6 +34,11 @@ export default new VueRouter({
         path: '/addadmin',
         component: resolve => require(['@/router/addadmin'], resolve),
         meta: ["数据管理","添加管理员"],
+      },
+      {
+        path: '/closeprice',
+        component: resolve => require(['@/router/closeprice'], resolve),
+        meta: ["数据管理","开盘价"],
       }
     ],
     }
