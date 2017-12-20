@@ -7,8 +7,8 @@
 					<el-submenu index="2">
 						<template slot="title"><i class="el-icon-document"></i>数据管理</template>
 						<el-menu-item index="addadmin">添加管理员</el-menu-item>
-						<el-menu-item index="closeprice">开盘价</el-menu-item>
-						<el-menu-item index="foodList">食品列表</el-menu-item>
+						<el-menu-item index="basecoin">基础币种配置</el-menu-item>
+						<el-menu-item index="basetactics">基础策略配置</el-menu-item>
 						<el-menu-item index="orderList">订单列表</el-menu-item>
 						<el-menu-item index="adminList">管理员列表</el-menu-item>
 					</el-submenu>

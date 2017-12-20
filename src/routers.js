@@ -36,9 +36,14 @@ export default new VueRouter({
         meta: ["数据管理","添加管理员"],
       },
       {
-        path: '/closeprice',
-        component: resolve => require(['@/router/closeprice'], resolve),
-        meta: ["数据管理","开盘价"],
+        path: '/basecoin',
+        component: resolve => require(['@/router/basecoin'], resolve),
+        meta: ["数据管理","基础币种配置"],
+      },
+      {
+        path: '/basetactics',
+        component: resolve => require(['@/router/basetactics'], resolve),
+        meta: ["数据管理","基础策略配置"],
       }
     ],
     }
