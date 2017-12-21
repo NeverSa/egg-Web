@@ -12,48 +12,43 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="基础币种"
+      label="交易对"
       width="200">
       <template slot-scope="scope">     
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.base_currency }}</el-tag>
+            <el-tag size="medium">{{ scope.row.symbol }}</el-tag>
           </div>      
       </template>
     </el-table-column>
     <el-table-column
-      label="计价币种"
+      label="卖出价"
       width="200">
        <template slot-scope="scope">     
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.quote_currency }}</el-tag>
+            <el-tag size="medium">{{ scope.row.low }}</el-tag>
           </div>      
       </template>
     </el-table-column>
     <el-table-column
-      label="开盘价"
-      width="200">
-       <template slot-scope="scope">     
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.closeprice}}</el-tag>
-          </div>      
-      </template>
-    </el-table-column>
-      <el-table-column
       label="买入价"
       width="200">
        <template slot-scope="scope">     
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.buyprice}}</el-tag>
+            <el-tag size="medium">{{ scope.row.height}}</el-tag>
           </div>      
       </template>
     </el-table-column>
-     <el-table-column
-      label="币种接口类型"
+      <el-table-column
+      label="是否禁用"
       width="200">
-       <template slot-scope="scope">     
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.symbol }}</el-tag>
-          </div>      
+       <template slot-scope="scope">    
+         <el-switch
+            v-model="scope.row.abled"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            @change="change(scope.row.abled,scope.row._id)">
+          </el-switch> 
+              
       </template>
     </el-table-column>
     <el-table-column label="操作">
@@ -84,25 +79,18 @@
     </el-pagination>
     </el-col>
   </el-row>
-
-  
-        <el-dialog title="修改开盘价" :visible.sync="dialogFormVisible">
+        <el-dialog title="修改策略" :visible.sync="dialogFormVisible">
         <el-form :model="form" :inline="true">
-            <el-form-item label="基础币种" :label-width="formLabelWidth">
-            <el-input v-model="form.base_currency" auto-complete="off"></el-input>
-           </el-form-item>
-          <el-form-item label="计价币种" :label-width="formLabelWidth">
-            <el-input v-model="form.quote_currency" auto-complete="off"></el-input>
-           </el-form-item>
-            <el-form-item label="开盘价" :label-width="formLabelWidth">
-            <el-input v-model="form.closeprice" auto-complete="off"></el-input>
-           </el-form-item>
-            <el-form-item label="币种接口类型" :label-width="formLabelWidth">
+            <el-form-item label="交易对" :label-width="formLabelWidth">
             <el-input v-model="form.symbol" auto-complete="off"></el-input>
            </el-form-item>
-             <el-form-item label="买入价" :label-width="formLabelWidth">
-            <el-input v-model="form.buyprice" auto-complete="off"></el-input>
+          <el-form-item label="买入幅度" :label-width="formLabelWidth">
+            <el-input v-model="form.low" auto-complete="off"></el-input>
            </el-form-item>
+            <el-form-item label="卖出幅度" :label-width="formLabelWidth">
+            <el-input v-model="form.height" auto-complete="off"></el-input>
+           </el-form-item>
+          
          </el-form>
          
         <div slot="footer" class="dialog-footer">
@@ -114,21 +102,16 @@
     <!-- 新增 -->
         <el-dialog title="新增" :visible.sync="addormVisible">
         <el-form :model="form" :inline="true">
-            <el-form-item label="基础币种" :label-width="formLabelWidth">
-            <el-input v-model="form.base_currency" auto-complete="off"></el-input>
-           </el-form-item>
-          <el-form-item label="计价币种" :label-width="formLabelWidth">
-            <el-input v-model="form.quote_currency" auto-complete="off"></el-input>
-           </el-form-item>
-            <el-form-item label="开盘价" :label-width="formLabelWidth">
-            <el-input v-model="form.closeprice" auto-complete="off"></el-input>
-           </el-form-item>
-            <el-form-item label="币种接口类型" :label-width="formLabelWidth">
+          <el-form-item label="交易对" :label-width="formLabelWidth">
             <el-input v-model="form.symbol" auto-complete="off"></el-input>
            </el-form-item>
-             <el-form-item label="买入价" :label-width="formLabelWidth">
-            <el-input v-model="form.buyprice" auto-complete="off"></el-input>
+          <el-form-item label="买入幅度" :label-width="formLabelWidth">
+            <el-input v-model="form.low" auto-complete="off"></el-input>
            </el-form-item>
+            <el-form-item label="卖出幅度" :label-width="formLabelWidth">
+            <el-input v-model="form.height" auto-complete="off"></el-input>
+           </el-form-item>
+          
          </el-form>
          
         <div slot="footer" class="dialog-footer">
@@ -141,7 +124,7 @@
 </template>
 
 <script>
-import {getAllTactics,getOneTactics,deleteOneTactics,editOneTactics,addOneTactics} from "../api/api"
+import {getAllTactics,getOneTactics,deleteOneTactics,editOneTactics,addOneTactics,updataAbleTactics} from "../api/api"
   export default {
     data() {
       return {
@@ -153,11 +136,9 @@ import {getAllTactics,getOneTactics,deleteOneTactics,editOneTactics,addOneTactic
           formLabelWidth: '100px',
           seletcid:"",
           form:{
-            "closeprice":"",
-            "base_currency":"",
-            "quote_currency":"",
             "symbol":"",
-            "buyprice":""
+            "height":"",
+            "low":"",
           },
           
       }
@@ -165,16 +146,14 @@ import {getAllTactics,getOneTactics,deleteOneTactics,editOneTactics,addOneTactic
     methods: {
      add(){
          this.form={
-          "closeprice": "",
-          "base_currency":"",
-          "quote_currency":"",
-          "symbol":"",
-          "buyprice":""
+            "symbol":"",
+            "height":"",
+            "low":"",
        };
         this.addormVisible=true;
      },
      saveadd(){
-       addOneCoin(this.form).then(res=>{
+       addOneTactics(this.form).then(res=>{
          if(res.data.success){
              this.addormVisible=false;
              this.changePage(15,this.currentPage);
@@ -189,7 +168,7 @@ import {getAllTactics,getOneTactics,deleteOneTactics,editOneTactics,addOneTactic
      },
      submitEdit(){ 
       var nObj = Object.assign({},{"id":this.seletcid},this.form);
-      editOneCoin(nObj).then(res=>{
+      editOneTactics(nObj).then(res=>{
                  if(res.data.success){
                 this.dialogFormVisible=false;
                 this.changePage(15,this.currentPage)
@@ -206,18 +185,32 @@ import {getAllTactics,getOneTactics,deleteOneTactics,editOneTactics,addOneTactic
      },
       changePage(pagesize,contpage){
         getAllTactics({"pagesize":pagesize,"contpage":contpage}).then(res=>{
+          console.log(res)
          if(res.data.success){
          this.tableData=res.data.list
          this.Totle=res.data.totle
          }
        })
-      },  
+      }, 
+      change(value,id){
+         updataAbleTactics({"_id":id,"abled":value}).then(res=>{
+           console.log(res)
+         })
+      },
+      
       handleCurrentChange(currentPage) {
         this.changePage(15,currentPage)
       },
       handleDelete(id) {
-          deleteOneCoin({"id":id}).then(res=>{
-              if(res.data.success){
+         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+        }).then(res=>{
+
+          return deleteOneTactics({"id":id})
+        }).then(res=>{
+             if(res.data.success){
                    this.$message({
                         message: '删除成功',
                         type: 'success'
@@ -226,18 +219,17 @@ import {getAllTactics,getOneTactics,deleteOneTactics,editOneTactics,addOneTactic
               }else{
                    this.$message.error('删除失败');
               }
-          })
+        })
+
       },
          handleEdit(id) {
            this.seletcid= id
            this.dialogFormVisible=true;
-           getOneCoin({"id":this.seletcid}).then(res=>{
+           getOneTactics({"id":this.seletcid}).then(res=>{
              this.form={
-                    "closeprice": res.data.data[0].closeprice,
-                    "base_currency":res.data.data[0].base_currency,
-                    "quote_currency":res.data.data[0].quote_currency,
-                    "symbol":res.data.data[0].symbol,
-                    "buyprice":res.data.data[0].buyprice
+                    "symbol": res.data.data[0].symbol,
+                    "height":res.data.data[0].height,
+                    "low":res.data.data[0].low,
                  }
          })
       }

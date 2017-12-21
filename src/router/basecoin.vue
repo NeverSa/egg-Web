@@ -216,8 +216,15 @@ import {getAllCoin,deleteOneCoin,editOneCoin,getOneCoin,addOneCoin} from "../api
         this.changePage(15,currentPage)
       },
       handleDelete(id) {
-          deleteOneCoin({"id":id}).then(res=>{
-              if(res.data.success){
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+        }).then(res=>{
+
+          return deleteOneCoin({"id":id})
+        }).then(res=>{
+             if(res.data.success){
                    this.$message({
                         message: '删除成功',
                         type: 'success'
@@ -226,7 +233,8 @@ import {getAllCoin,deleteOneCoin,editOneCoin,getOneCoin,addOneCoin} from "../api
               }else{
                    this.$message.error('删除失败');
               }
-          })
+        })
+
       },
          handleEdit(id) {
            this.seletcid= id

@@ -41,7 +41,8 @@ export const deleteOneTactics=data=>Myaxios('/pro/delete_one_tactics',data, 'pos
 export const editOneTactics=data=>Myaxios('/pro/edit_one_tactics',data, 'post')
 //新增单个币种策略
 export const addOneTactics=data=>Myaxios('/pro/add_one_tactics',data, 'post')
-
+//更新单个币种禁用状态
+export const updataAbleTactics=data=>Myaxios('/pro/updata_able_tactics',data, 'post')
 
 //
 
